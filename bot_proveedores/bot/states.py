@@ -2,7 +2,6 @@ class ChatState:
     INICIO = "INICIO"
     REGISTRANDO_RAZON_SOCIAL = "REGISTRANDO_RAZON_SOCIAL"
     REGISTRANDO_CUIT = "REGISTRANDO_CUIT"
-    REGISTRANDO_CONTACTO = "REGISTRANDO_CONTACTO"
     REGISTRANDO_TELEFONO = "REGISTRANDO_TELEFONO"
     REGISTRANDO_EMAIL = "REGISTRANDO_EMAIL"
     REGISTRANDO_DIRECCION = "REGISTRANDO_DIRECCION"
@@ -16,7 +15,6 @@ class ChatState:
     STATES_REGISTRO = [
         REGISTRANDO_RAZON_SOCIAL,
         REGISTRANDO_CUIT,
-        REGISTRANDO_CONTACTO,
         REGISTRANDO_TELEFONO,
         REGISTRANDO_EMAIL,
         REGISTRANDO_DIRECCION,
@@ -29,7 +27,6 @@ class ChatState:
         flujo = [
             ChatState.REGISTRANDO_RAZON_SOCIAL,
             ChatState.REGISTRANDO_CUIT,
-            ChatState.REGISTRANDO_CONTACTO,
             ChatState.REGISTRANDO_TELEFONO,
             ChatState.REGISTRANDO_EMAIL,
             ChatState.REGISTRANDO_DIRECCION,
@@ -48,7 +45,6 @@ class ChatState:
         mapeo = {
             ChatState.REGISTRANDO_RAZON_SOCIAL: "Razón Social",
             ChatState.REGISTRANDO_CUIT: "CUIT",
-            ChatState.REGISTRANDO_CONTACTO: "Contacto",
             ChatState.REGISTRANDO_TELEFONO: "Teléfono",
             ChatState.REGISTRANDO_EMAIL: "Email",
             ChatState.REGISTRANDO_DIRECCION: "Dirección",

@@ -53,10 +53,6 @@ def main():
                 MessageHandler(filters.TEXT & ~filters.COMMAND,
                     lambda u, c: handlers.handle_text(u, c, ChatState.REGISTRANDO_CUIT))
             ],
-            ChatState.REGISTRANDO_CONTACTO: [
-                MessageHandler(filters.TEXT & ~filters.COMMAND,
-                    lambda u, c: handlers.handle_text(u, c, ChatState.REGISTRANDO_CONTACTO))
-            ],
             ChatState.REGISTRANDO_TELEFONO: [
                 MessageHandler(filters.TEXT & ~filters.COMMAND,
                     lambda u, c: handlers.handle_text(u, c, ChatState.REGISTRANDO_TELEFONO))

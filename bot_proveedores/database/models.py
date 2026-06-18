@@ -37,7 +37,6 @@ class SolicitudProveedor:
     telegram_usuario: int
     razon_social: str
     cuit: str
-    contacto: str
     telefono: str
     email: str
     direccion: str
@@ -53,7 +52,6 @@ class SolicitudProveedor:
             telegram_usuario=int(data["telegram_usuario"]),
             razon_social=data["razon_social"],
             cuit=data["cuit"],
-            contacto=data["contacto"],
             telefono=data["telefono"],
             email=data["email"],
             direccion=data["direccion"],
@@ -69,7 +67,6 @@ class SolicitudProveedor:
             "telegram_usuario": self.telegram_usuario,
             "razon_social": self.razon_social,
             "cuit": self.cuit,
-            "contacto": self.contacto,
             "telefono": self.telefono,
             "email": self.email,
             "direccion": self.direccion,
@@ -85,7 +82,6 @@ class Proveedor:
     id: Optional[int]
     razon_social: str
     cuit: str
-    contacto: str
     telefono: str
     email: str
     direccion: str
@@ -99,7 +95,6 @@ class Proveedor:
             id=int(data["id"]) if data.get("id") else None,
             razon_social=data["razon_social"],
             cuit=data["cuit"],
-            contacto=data["contacto"],
             telefono=data["telefono"],
             email=data["email"],
             direccion=data["direccion"],
@@ -113,7 +108,6 @@ class Proveedor:
             "id": self.id,
             "razon_social": self.razon_social,
             "cuit": self.cuit,
-            "contacto": self.contacto,
             "telefono": self.telefono,
             "email": self.email,
             "direccion": self.direccion,
@@ -134,7 +128,6 @@ class EstadoUsuario:
     INICIO = "INICIO"
     REGISTRANDO_RAZON_SOCIAL = "REGISTRANDO_RAZON_SOCIAL"
     REGISTRANDO_CUIT = "REGISTRANDO_CUIT"
-    REGISTRANDO_CONTACTO = "REGISTRANDO_CONTACTO"
     REGISTRANDO_TELEFONO = "REGISTRANDO_TELEFONO"
     REGISTRANDO_EMAIL = "REGISTRANDO_EMAIL"
     REGISTRANDO_DIRECCION = "REGISTRANDO_DIRECCION"

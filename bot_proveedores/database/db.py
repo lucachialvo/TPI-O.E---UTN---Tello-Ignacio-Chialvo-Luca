@@ -38,8 +38,8 @@ class Database:
 
     def init_csv_files(self):
         self._ensure_file(self.usuarios_csv, ["id", "telegram_id", "nombre", "estado_actual", "fecha_inicio"])
-        self._ensure_file(self.solicitudes_csv, ["id", "telegram_usuario", "razon_social", "cuit", "contacto", "telefono", "email", "direccion", "rubro", "descripcion", "estado", "fecha_creacion"])
-        self._ensure_file(self.proveedores_csv, ["id", "razon_social", "cuit", "contacto", "telefono", "email", "direccion", "rubro", "descripcion", "fecha_alta"])
+        self._ensure_file(self.solicitudes_csv, ["id", "telegram_usuario", "razon_social", "cuit", "telefono", "email", "direccion", "rubro", "descripcion", "estado", "fecha_creacion"])
+        self._ensure_file(self.proveedores_csv, ["id", "razon_social", "cuit", "telefono", "email", "direccion", "rubro", "descripcion", "fecha_alta"])
 
     def get_usuario(self, telegram_id: int) -> Optional[Usuario]:
         if not os.path.exists(self.usuarios_csv):
@@ -93,7 +93,7 @@ class Database:
         solicitud.fecha_creacion = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         solicitud.estado = EstadoSolicitud.PENDIENTE_REVISION
         with open(self.solicitudes_csv, "a", newline="", encoding="utf-8") as f:
-            writer = csv.DictWriter(f, fieldnames=["id", "telegram_usuario", "razon_social", "cuit", "contacto", "telefono", "email", "direccion", "rubro", "descripcion", "estado", "fecha_creacion"])
+            writer = csv.DictWriter(f, fieldnames=["id", "telegram_usuario", "razon_social", "cuit", "telefono", "email", "direccion", "rubro", "descripcion", "estado", "fecha_creacion"])
             writer.writerow(solicitud.to_dict())
         return solicitud.id
 
@@ -127,7 +127,7 @@ class Database:
                     row["estado"] = nuevo_estado
                 rows.append(row)
         with open(self.solicitudes_csv, "w", newline="", encoding="utf-8") as f:
-            writer = csv.DictWriter(f, fieldnames=["id", "telegram_usuario", "razon_social", "cuit", "contacto", "telefono", "email", "direccion", "rubro", "descripcion", "estado", "fecha_creacion"])
+            writer = csv.DictWriter(f, fieldnames=["id", "telegram_usuario", "razon_social", "cuit", "telefono", "email", "direccion", "rubro", "descripcion", "estado", "fecha_creacion"])
             writer.writeheader()
             writer.writerows(rows)
 
@@ -146,7 +146,6 @@ class Database:
             id=self._get_next_id(self.proveedores_csv),
             razon_social=solicitud.razon_social,
             cuit=solicitud.cuit,
-            contacto=solicitud.contacto,
             telefono=solicitud.telefono,
             email=solicitud.email,
             direccion=solicitud.direccion,
@@ -155,6 +154,6 @@ class Database:
             fecha_alta=datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         )
         with open(self.proveedores_csv, "a", newline="", encoding="utf-8") as f:
-            writer = csv.DictWriter(f, fieldnames=["id", "razon_social", "cuit", "contacto", "telefono", "email", "direccion", "rubro", "descripcion", "fecha_alta"])
+            writer = csv.DictWriter(f, fieldnames=["id", "razon_social", "cuit", "telefono", "email", "direccion", "rubro", "descripcion", "fecha_alta"])
             writer.writerow(proveedor.to_dict())
         return proveedor.id

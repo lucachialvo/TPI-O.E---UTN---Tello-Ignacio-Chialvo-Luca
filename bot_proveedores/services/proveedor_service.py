@@ -11,7 +11,6 @@ from database.models import SolicitudProveedor
 class DatosProveedor:
     razon_social: str = ""
     cuit: str = ""
-    contacto: str = ""
     telefono: str = ""
     email: str = ""
     direccion: str = ""
@@ -29,8 +28,6 @@ class ProveedorService:
             return Validators.validar_no_vacio(valor, "Razón Social")
         elif estado == ChatState.REGISTRANDO_CUIT:
             return Validators.validar_cuit(valor)
-        elif estado == ChatState.REGISTRANDO_CONTACTO:
-            return Validators.validar_no_vacio(valor, "Contacto")
         elif estado == ChatState.REGISTRANDO_TELEFONO:
             return Validators.validar_telefono(valor)
         elif estado == ChatState.REGISTRANDO_EMAIL:
@@ -57,7 +54,6 @@ class ProveedorService:
             telegram_usuario=datos.telegram_usuario,
             razon_social=datos.razon_social,
             cuit=Validators.normalizar_cuit(datos.cuit),
-            contacto=datos.contacto,
             telefono=datos.telefono,
             email=datos.email,
             direccion=datos.direccion,
