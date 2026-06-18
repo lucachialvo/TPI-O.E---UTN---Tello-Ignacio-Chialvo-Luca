@@ -16,18 +16,9 @@ class Validators:
     def validar_email(email: str) -> Tuple[bool, str]:
         if not email or not email.strip():
             return False, "El email es obligatorio."
-        if '@' not in email:
-            return False, "El correo debe contener el símbolo @."
-        partes = email.split('@')
-        if len(partes) != 2:
-            return False, "El correo debe contener exactamente un @."
-        usuario, dominio = partes
-        if not usuario:
-            return False, "El correo debe tener un usuario antes del @."
-        if not dominio or '.' not in dominio:
-            return False, "El correo debe tener un dominio con punto (ej: empresa.com)."
-        if dominio.startswith('.') or dominio.endswith('.'):
-            return False, "El dominio no puede empezar o terminar con punto."
+        patron = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+        if not re.match(patron, email):
+            return False, "El correo debe tener formato válido. Ejemplo: ejemplo@empresa.com"
         return True, ""
 
     @staticmethod

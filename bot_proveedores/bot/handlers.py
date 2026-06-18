@@ -38,8 +38,15 @@ class Handlers:
         
         await update.message.reply_text(
             "¡Bienvenido al sistema de registro de proveedores!\n"
-            "Este bot le ayudará a registrar un nuevo proveedor en nuestra base de datos.\n"
-            "Comenzaremos solicitando los datos del proveedor.\n\n"
+            "Este bot le ayudará a registrar un nuevo proveedor en nuestra base de datos.\n\n"
+            "A continuación se le solicitarán los siguientes datos:\n"
+            "• Razón Social\n"
+            "• CUIT (sin guiones, solo números)\n"
+            "• Teléfono (formato: +5491112345678 o 1112345678)\n"
+            "• Email\n"
+            "• Dirección\n"
+            "• Rubro\n"
+            "• Descripción\n\n"
             "Ingrese la RAZÓN SOCIAL del proveedor:"
         )
         return ChatState.REGISTRANDO_RAZON_SOCIAL
@@ -89,8 +96,6 @@ class Handlers:
                 msg += f"  - Razón Social: {user_data.datos.razon_social}\n"
             if user_data.datos.cuit:
                 msg += f"  - CUIT: {user_data.datos.cuit}\n"
-            if user_data.datos.contacto:
-                msg += f"  - Contacto: {user_data.datos.contacto}\n"
         
         await update.message.reply_text(msg)
 
@@ -130,7 +135,6 @@ class Handlers:
             f"Solicitud #{solicitud.id}\n\n"
             f"Razón Social: {solicitud.razon_social}\n"
             f"CUIT: {solicitud.cuit}\n"
-            f"Contacto: {solicitud.contacto}\n"
             f"Teléfono: {solicitud.telefono}\n"
             f"Email: {solicitud.email}\n"
             f"Dirección: {solicitud.direccion}\n"
@@ -191,14 +195,6 @@ class Handlers:
             user_data.datos.cuit = texto
             nuevo_estado = ChatState.siguiente_estado(estado_actual)
         
-        elif estado_actual == ChatState.REGISTRANDO_CONTACTO:
-            valido, error = self.proveedor_service.validar_campo(estado_actual, texto)
-            if not valido:
-                await update.message.reply_text(error)
-                return estado_actual
-            user_data.datos.contacto = texto
-            nuevo_estado = ChatState.siguiente_estado(estado_actual)
-        
         elif estado_actual == ChatState.REGISTRANDO_TELEFONO:
             valido, error = self.proveedor_service.validar_campo(estado_actual, texto)
             if not valido:
@@ -257,8 +253,20 @@ class Handlers:
             return estado_actual
         
         self.db.crear_o_actualizar_usuario(user_id, nuevo_estado)
-        campo = ChatState.estado_a_campo(nuevo_estado)
-        await update.message.reply_text(f"✓ {campo} registrado.\n\nIngrese {campo}:")
+        campo_actual = ChatState.estado_a_campo(estado_actual)
+        campo_siguiente = ChatState.estado_a_campo(nuevo_estado)
+        
+        mensajes_siguiente = {
+            ChatState.REGISTRANDO_CUIT: "Ingrese CUIT (sin guiones, solo números):",
+            ChatState.REGISTRANDO_TELEFONO: "Ingrese Teléfono (formato: +5491112345678 o 1112345678):",
+            ChatState.REGISTRANDO_EMAIL: "Ingrese Email:",
+            ChatState.REGISTRANDO_DIRECCION: "Ingrese Dirección:",
+            ChatState.REGISTRANDO_RUBRO: "Ingrese Rubro:",
+            ChatState.REGISTRANDO_DESCRIPCION: "Ingrese Descripción:",
+        }
+        
+        mensaje_siguiente = mensajes_siguiente.get(nuevo_estado, f"Ingrese {campo_siguiente}:")
+        await update.message.reply_text(f"✓ {campo_actual} registrada/o correctamente.\n\n{mensaje_siguiente}")
         
         if nuevo_estado == ChatState.VALIDANDO_DATOS:
             return await self.handle_text(update, context, nuevo_estado)
