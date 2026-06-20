@@ -90,6 +90,18 @@ bot_proveedores/
 
 ## Instrucciones para la puesta en funcionamiento
 
+### Configuración inicial
+
+Una vez clonado el repositorio, es necesario configurar el archivo de configuración:
+
+```bash
+cp bot_proveedores/config.example.py bot_proveedores/config.py
+```
+
+> **Nota**: `config.py` contiene el token de Telegram y no está incluido en el repositorio por seguridad.
+
+### Ejecución
+
 Para poner en funcionamiento el programa, es necesario acceder mediante la terminal al directorio del proyecto utilizando el comando:
 ```
 cd bot_proveedores
