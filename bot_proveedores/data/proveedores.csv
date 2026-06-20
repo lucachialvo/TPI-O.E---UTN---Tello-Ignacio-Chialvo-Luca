@@ -1,1 +1,2 @@
-id,razon_social,cuit,contacto,telefono,email,direccion,rubro,descripcion,fecha_alta
+id,razon_social,cuit,telefono,email,direccion,rubro,descripcion,fecha_alta
+1,Miangel.sa,23405952459,3813425282,salchidev@gmail.com,"salta 131, san miguel de tucumán",decorativo,EMpresa que se encarga de los decorativos de eventos,2026-06-18 20:36:13

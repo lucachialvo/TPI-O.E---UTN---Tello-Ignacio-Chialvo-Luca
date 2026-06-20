@@ -1,2 +1,3 @@
-id,telegram_usuario,razon_social,cuit,contacto,telefono,email,direccion,rubro,descripcion,estado,fecha_creacion
-1,1942961502,NACHO_TELLO.srl,23405952459,Nacho,2613421582,nachorfs@gmail.com,Av. Rep del libano 1716,Metalurgica,"Metales de la mejor calidad, implementaciónes premium",PENDIENTE_REVISION,2026-06-18 16:15:46
+id,telegram_usuario,razon_social,cuit,telefono,email,direccion,rubro,descripcion,estado,fecha_creacion
+1,1942961502,Nachosito.srl,23405952459,2613421582,nacho@empresa.com,"Salta 113, San miguel de Tucumán, Tucumán",Tecnico celulares,Empresa que maneja toda la marca apple en San Miguel de Tucumán,RECHAZADO,2026-06-18 20:33:38
+2,1942961502,Miangel.sa,23405952459,3813425282,salchidev@gmail.com,"salta 131, san miguel de tucumán",decorativo,EMpresa que se encarga de los decorativos de eventos,APROBADO,2026-06-18 20:35:50

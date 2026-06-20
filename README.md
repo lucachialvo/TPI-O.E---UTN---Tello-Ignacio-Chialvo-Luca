@@ -88,47 +88,52 @@ bot_proveedores/
 | `APROBADO` | Solicitud aprobada, proveedor registrado |
 | `RECHAZADO` | Solicitud rechazada |
 
-## Instalación
+## Instrucciones para la puesta en funcionamiento
 
-### Requisitos Previos
+Para poner en funcionamiento el programa, es necesario acceder mediante la terminal al directorio del proyecto utilizando el comando:
+```
+cd bot_proveedores
+```
+Una vez ubicado dentro del directorio correspondiente, se deben instalar las dependencias necesarias para la ejecución del sistema. En particular, se requiere la librería python-telegram-bot en su versión 20.7, la cual puede instalarse mediante el siguiente comando:
+```
+pip install python-telegram-bot==20.7
+```
+Antes de ejecutar el programa, es necesario configurar el token de autenticación del bot de Telegram. Este token permite que la aplicación pueda comunicarse con la API de Telegram y gestionar la recepción y envío de mensajes.
 
-- Python 3.8+
-- Token de bot de Telegram (obtenido de @BotFather)
+Para obtener un token válido, el usuario debe ingresar a la aplicación de Telegram y buscar el bot oficial denominado BotFather. Desde este bot se debe crear un nuevo bot utilizando el comando correspondiente, asignándole un nombre y un identificador único. Una vez finalizado el proceso de creación, BotFather proporcionará un token de acceso que deberá ser utilizado para configurar la aplicación.
 
-### Pasos
-
-1. **Clonar o descargar el proyecto**
-
-2. **Crear entorno virtual (recomendado)**
-```bash
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-venv\Scripts\activate     # Windows
+El token obtenido debe establecerse como una variable de entorno antes de iniciar la ejecución del programa. Para ello, se debe ejecutar el siguiente comando en la terminal:
+```
+export TELEGRAM_TOKEN="su_token_aqui"
 ```
 
-3. **Instalar dependencias**
-```bash
-pip install -r requirements.txt
+Como alternativa, para evitar configurar la variable manualmente cada vez que se inicia una nueva sesión de terminal, se puede agregar esta línea al archivo de configuración del intérprete de comandos utilizado:
+
+Para usuarios de Zsh:
+```
+~/.zshrc
+```
+Para usuarios de Bash:
+```
+~/.bashrc
 ```
 
-4. **Configurar el token del bot**
-Editar `config.py` y colocar el token de Telegram:
+El programa obtiene el valor de esta variable desde el archivo config.py mediante la siguiente instrucción:
 ```python
-TELEGRAM_TOKEN = "TU_TOKEN_AQUI"
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 ```
+De esta forma, el token de acceso permanece separado del código fuente, mejorando la seguridad y facilitando la configuración del sistema en diferentes entornos de ejecución.
 
-5. **Inicializar estructura de datos**
-```bash
-python main.py --init
+Finalmente, luego de instalar las dependencias y configurar correctamente la variable de entorno, el programa puede ejecutarse mediante:
 ```
-
-## Ejecución
-
-```bash
 python main.py
 ```
+o, dependiendo de la configuración del sistema:
+```
+python3 main.py
+```
 
-El bot estará activo y responderá a los comandos en Telegram.
+Al iniciar la ejecución del archivo principal, el bot quedará operativo y preparado para recibir y procesar mensajes correctamente.
 
 ## Comandos Disponibles
 
